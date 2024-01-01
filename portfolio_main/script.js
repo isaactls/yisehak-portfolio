@@ -1,6 +1,6 @@
 let bdy = document.querySelector('body')
 let mode = document.querySelector('.mode')
-let check = false
+let check = false;
 mode.addEventListener('click', ()=>{
     bdy.classList.toggle('background')
     check = !check
@@ -18,3 +18,7 @@ mode.addEventListener('click', ()=>{
         mode.appendChild(img)
     }
 })
+const messages = () =>{
+alert('contact me to get email and resume info ')
+}
+
