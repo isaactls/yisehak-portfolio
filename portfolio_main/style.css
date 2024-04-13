@@ -84,7 +84,7 @@ background-color: #fff;
     width: 40;
 }
 .mode img:hover{
-    background-color: aliceblue;
+    border-bottom: solid 1px black;
 }
 .background{
     background-color: #999999;
