@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6, span {
     color: #242424;
     line-height: 1.25;
     text-align: center;
-}  
+}
 h1 {
     font-size: 36px;
 }
@@ -181,11 +181,11 @@ nav {
 @keyframes fade-up {
     0% {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateX(-100%);
     }
     100% {
         opacity: 1;
-        transform:translateY(0)
+        transform:translateX(0)
     }
 }
 
