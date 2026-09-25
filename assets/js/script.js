@@ -98,10 +98,11 @@
     if (navbar) {
       navbar.classList.toggle('nav--scrolled', scrollY > 10);
 
-      // Header sticks for the hero area, then releases and scrolls away
-      const hero = document.getElementById('about-me');
-      if (hero) {
-        const releasePoint = hero.offsetHeight - navHeight;
+      // Header may stick through the hero and tech-stack sections; once the
+      // projects section arrives it slides away like every other element.
+      const stickZone = document.getElementById('languages');
+      if (stickZone) {
+        const releasePoint = stickZone.offsetTop + stickZone.offsetHeight - navHeight;
         navbar.classList.toggle('nav--released', scrollY > releasePoint);
       }
     }
@@ -112,6 +113,8 @@
     }
 
     if (backToTop) backToTop.classList.toggle('visible', scrollY > 600);
+
+    ticking = false; // re-arm the scroll handler
   }
 
   let ticking = false;
