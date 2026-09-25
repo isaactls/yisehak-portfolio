@@ -98,10 +98,11 @@
     if (navbar) {
       navbar.classList.toggle('nav--scrolled', scrollY > 10);
 
-      // Once the projects section arrives, the header slides up and away
-      const stickZone = document.getElementById('languages');
-      if (stickZone) {
-        const releasePoint = stickZone.offsetTop + stickZone.offsetHeight - navHeight;
+      // Header exists only over the hero: once the about-me section is done
+      // (tech-stack section reaches the header), it slides up and away
+      const nextSection = document.getElementById('languages');
+      if (nextSection) {
+        const releasePoint = nextSection.offsetTop - navHeight;
         navbar.classList.toggle('nav--hidden', scrollY > releasePoint);
       }
     }
