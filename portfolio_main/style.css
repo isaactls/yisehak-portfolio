@@ -594,8 +594,6 @@ nav {
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  transition: transform 300ms ease, box-shadow 300ms ease;
-  will-change: transform;
 }
 
 .project__wrapper::before {
