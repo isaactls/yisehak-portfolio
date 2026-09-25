@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://isaactls.github.io/sitemap.xml
+Sitemap: https://isaactls.github.io/yisehak-portfolio/sitemap.xml
