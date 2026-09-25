@@ -13,7 +13,7 @@
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     if (modeImg) {
-      modeImg.src = theme === 'dark' ? './image/night.png' : './image/light.png';
+      modeImg.src = theme === 'dark' ? './assets/images/night.png' : './assets/images/light.png';
     }
   }
 
@@ -85,16 +85,6 @@
   } else {
     revealEls.forEach((el) => el.classList.add('visible'));
   }
-
-  /* ---------- Skill levels on hover ---------- */
-  document.querySelectorAll('.language').forEach((el) => {
-    const level = el.getAttribute('data-level');
-    if (!level) return;
-    const label = document.createElement('span');
-    label.className = 'language__level';
-    label.textContent = `${level}%`;
-    el.appendChild(label);
-  });
 
   /* ---------- Navbar shadow + progress bar + back-to-top ---------- */
   const navbar = document.getElementById('navbar');

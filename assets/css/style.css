@@ -196,7 +196,7 @@ a {
 }
 
 nav {
-  height: 80px;
+  height: 100px;
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
@@ -238,7 +238,7 @@ nav {
 
 .personal__logo {
   font-size: 24px;
-  color: var(--text);
+  color: var(--purple);
   margin: 0 12px;
   font-weight: 900;
   letter-spacing: -0.5px;
@@ -740,22 +740,6 @@ nav {
   transform: scale(1);
 }
 
-.language__level {
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--purple);
-  opacity: 0;
-  transition: opacity 300ms ease 100ms;
-}
-
-.language:hover .language__level {
-  opacity: 1;
-}
-
 /* ========== PROJECTS (restored to original animation) ========== */
 .project {
     margin-bottom: 135px;
@@ -1146,6 +1130,7 @@ body.cursor-active .cursor-glow {
     top: 82px;
     right: 16px;
   }
+
 
   .project__description--para {
     font-size: 14px;
