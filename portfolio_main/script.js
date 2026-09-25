@@ -155,49 +155,41 @@
     if (e.key === 'Escape') setMenu(false);
   });
 
-  /* ---------- Custom cursor (dot + trailing ring) ---------- */
+  /* ---------- Cursor spotlight glow (follows the pointer) ---------- */
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion) {
-    const dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    const ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    body.append(dot, ring);
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    body.appendChild(glow);
 
-    let mouseX = -100;
-    let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
+    const HALF = 240; // half of the 480px glow
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let glowX = targetX;
+    let glowY = targetY;
     let started = false;
 
     document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+      targetX = e.clientX;
+      targetY = e.clientY;
       body.classList.add('cursor-active');
 
       if (!started) {
-        ringX = mouseX;
-        ringY = mouseY;
-        ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+        glowX = targetX;
+        glowY = targetY;
         started = true;
-        requestAnimationFrame(animateRing);
+        requestAnimationFrame(animateGlow);
       }
     });
 
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
-      requestAnimationFrame(animateRing);
+    function animateGlow() {
+      glowX += (targetX - glowX) * 0.08;
+      glowY += (targetY - glowY) * 0.08;
+      glow.style.transform = `translate(${glowX - HALF}px, ${glowY - HALF}px)`;
+      requestAnimationFrame(animateGlow);
     }
 
     document.addEventListener('mouseleave', () => body.classList.remove('cursor-active'));
-
-    // Grow the ring over anything interactive
-    document.querySelectorAll('a, button, .language, .project__wrapper, input, textarea').forEach((el) => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-    });
+    document.addEventListener('mouseenter', () => body.classList.add('cursor-active'));
   }
 
   /* ---------- Contact modal ---------- */
