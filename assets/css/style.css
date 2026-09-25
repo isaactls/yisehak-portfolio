@@ -9,7 +9,7 @@
   --purple: #6030b1;
   --purple-hover: #5d3eff;
   --card-bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.55);
+  --nav-bg: rgba(255, 255, 255, 0.65);
   --shadow: rgba(0, 0, 0, 0.45);
   --overlay: #1c1d25;
 }
@@ -20,7 +20,7 @@
   --text: #ededf2;
   --text-muted: #a2a5b3;
   --card-bg: #22242f;
-  --nav-bg: rgba(18, 19, 26, 0.6);
+  --nav-bg: rgba(18, 19, 26, 0.65);
   --purple: #7c5cff;
   --purple-hover: #9a7bff;
   --shadow: rgba(0, 0, 0, 0.75);
@@ -61,7 +61,7 @@ html {
 body {
   background-color: var(--bg);
   transition: background-color 300ms ease, color 300ms ease;
-  overflow-x: hidden;
+  /* NOTE: no overflow-x here — overflow on body breaks backdrop-filter blur */
   padding-top: 100px;
 }
 
