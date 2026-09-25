@@ -1,109 +1,131 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yisehak Tolesa — Computer Scientist and front-end developer building responsive, performant web applications.">
+    <meta name="theme-color" content="#6030b1">
+    <title>Yisehak Tolesa — Portfolio</title>
+    <link rel="icon" href="./image/logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
-    <title>isaac</title>
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
     <script src="./script.js" defer></script>
 </head>
 
 <body>
+    <!-- Reading progress bar -->
+    <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
     <section id="about-me">
-        <nav>
-            <div class="personal__logo">Yisehak Tolesa</div>
+        <nav id="navbar" aria-label="Main navigation">
+            <a href="#about-me" class="personal__logo">Yisehak<span class="text--purple">.</span></a>
             <ul class="nav__link--list">
-                <li class="nav__link"><a href="#languages" class="
-                nav__link--anchor
-                link__hover-effect
-                link__hover-effetc--black
-                "> Language</a>
+                <li class="nav__link"><a href="#languages"
+                        class="nav__link--anchor link__hover-effect link__hover-effect--black">Language</a>
                 </li>
-                <li class="nav__link"><a href="#projects" class="
-                    nav__link--anchor 
-                    link__hover-effect
-                    link__hover-effetc--black
-                    "> Projects</a>
+                <li class="nav__link"><a href="#projects"
+                        class="nav__link--anchor link__hover-effect link__hover-effect--black">Projects</a>
                 </li>
-                <li class="nav__link"><a href="" class="
-                    nav__link--anchor 
-                    nav__link--anchor-primary
-                    "> Contact</a>
+                <li class="nav__link"><a href="#" data-open-modal
+                        class="nav__link--anchor nav__link--anchor-primary">Contact</a>
                 </li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
-        <div class="mode">
-            <img src="./image/light.png" alt="change mode" style="width: 40px;">
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#languages" class="mobile-menu__link">Language</a>
+            <a href="#projects" class="mobile-menu__link">Projects</a>
+            <a href="#" data-open-modal class="mobile-menu__link mobile-menu__link--primary">Contact</a>
         </div>
+
+        <div class="mode">
+            <img src="./image/light.png" alt="Toggle dark mode" id="modeToggle" width="40" height="40">
+        </div>
+
         <div class="flex-1 flex">
             <div class="about-me__info row">
                 <div class="about-me__info--container">
                     <figure class="about-me__picture--mask">
-                        <img src="./image/my pic.jpg" alt="picture of me!" 
-                            class="about-me__picture">
+                        <img src="./image/my pic.jpg" alt="Picture of Yisehak Tolesa" class="about-me__picture">
                     </figure>
-                    <h1 class="about-me__info--title">Hey! I'm <span class="text--purple">Yisehak Tolesa</span>&nbsp;<span class="wave">👋</span></h1>
-                    <p class="about-me__info--para">I'm a <strong class="text--purple">Computer Scientist</strong> with a strong passion for building front-end responsive and performant web
-                        applications with great user experiences and Multiple strong IT skills that positively impacts the world with <span class="text--purple">  Computer science </span> bachelor degree.</p>
+                    <h1 class="about-me__info--title">Hey! I'm <span class="text--purple">Yisehak Tolesa</span>&nbsp;<span
+                            class="wave">👋</span></h1>
+                    <p class="about-me__info--para">I'm a <strong class="text--purple"><span id="typedText"></span><span
+                                class="typed-cursor" aria-hidden="true">|</span></strong> passionate about building
+                        responsive, performant web applications with great user experiences, using my
+                        <span class="text--purple">Computer Science</span> degree to positively impact the world.
+                    </p>
                     <div class="about-me__links">
-                        <a href="https://www.linkedin.com/in/yisehak-tolesa-0144bb221/" target="_blank" class="about-me__link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/isaactls/" class="about-me__link" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="" class="about-me__link"><i class="far fa-envelope" onclick="messages()"></i></a>
-                        <a href="" class="about-me__link"><i class="fas fa-file-pdf" onclick="messages()"></i></a>
+                        <a href="https://www.linkedin.com/in/yisehak-tolesa-0144bb221/" target="_blank" rel="noopener"
+                            class="about-me__link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/isaactls/" target="_blank" rel="noopener" class="about-me__link"
+                            aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" data-open-modal class="about-me__link" aria-label="Email"><i
+                                class="far fa-envelope"></i></a>
+                        <a href="#" data-open-modal class="about-me__link" aria-label="Resume"><i
+                                class="fas fa-file-pdf"></i></a>
                     </div>
+                    <a href="#projects" class="btn btn--primary about-me__cta">View my work <i
+                            class="fas fa-arrow-down"></i></a>
                 </div>
                 <figure class="about-me__img--container">
-                    <img src="./image/undraw_websites.svg" alt="" class="about-me__img">
+                    <img src="./image/undraw_websites.svg" alt="" class="about-me__img about-me__img--float">
                 </figure>
             </div>
         </div>
     </section>
+
     <section id="languages">
         <div class="container">
             <div class="row">
-                <h1 class="section__title">This is my <spanc class="text--purple">Technology slack</span></h1>
+                <h1 class="section__title reveal">This is my <span class="text--purple">technology stack</span></h1>
                 <div class="language__list">
-                    <div class="language">
+                    <div class="language reveal" data-level="90">
                         <figure class="language__img--wrapper">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/500px-HTML5_logo_and_wordmark.svg.png"
-                                alt="" class="language__img">
+                                alt="HTML" class="language__img">
                         </figure>
                         <span class="language__name">HTML</span>
                     </div>
-                    <div class="language">
+                    <div class="language reveal" data-level="85">
                         <figure class="language__img--wrapper">
-                            <img src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png" alt="CSS Logo"
-                                alt="" class="language__img">
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png" alt="CSS"
+                                class="language__img">
                         </figure>
                         <span class="language__name">CSS</span>
                     </div>
-                    <div class="language">
+                    <div class="language reveal" data-level="80">
                         <figure class="language__img--wrapper">
-                            <img src="https://api.badgr.io/public/badges/yKvg6q5wRDm_vgQzpzc5nQ/image"
-                                alt="" class="language__img">
+                            <img src="https://api.badgr.io/public/badges/yKvg6q5wRDm_vgQzpzc5nQ/image" alt="JavaScript"
+                                class="language__img">
                         </figure>
                         <span class="language__name">JavaScript</span>
                     </div>
-                    <div class="language">
+                    <div class="language reveal" data-level="75">
                         <figure class="language__img--wrapper">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/3840px-React-icon.svg.png"
-                                alt="" class="language__img">
+                                alt="React" class="language__img">
                         </figure>
-                        <span class="language__name">React Js</span>
+                        <span class="language__name">React JS</span>
                     </div>
-                    <div class="language">
+                    <div class="language reveal" data-level="70">
                         <figure class="language__img--wrapper">
                             <img src="https://www.freepnglogos.com/uploads/logo-mysql-png/logo-mysql-mysql-logo-png-images-are-download-crazypng-21.png"
-                                alt="" class="language__img">
+                                alt="MySQL" class="language__img">
                         </figure>
-                        <span class="language__name">MYSQL</span>
+                        <span class="language__name">MySQL</span>
                     </div>
-                    <div class="language">
+                    <div class="language reveal" data-level="85">
                         <figure class="language__img--wrapper">
-                            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-                                alt="" class="language__img">
+                            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"
+                                class="language__img">
                         </figure>
                         <span class="language__name">GitHub</span>
                     </div>
@@ -111,68 +133,94 @@
             </div>
         </div>
     </section>
+
     <section id="projects">
         <div class="container">
             <div class="row">
-                <h1 class="section__title">here are some of <span class="text--purple">my projects</span></h1>
+                <h1 class="section__title reveal">Here are some of <span class="text--purple">my projects</span></h1>
                 <ul class="project__list">
-                    <li class="project">
-                        <div class="project__wrapper">
-                            <img src="./image/portfo.png" alt="" class="project__img">
+                    <li class="project reveal">
+                        <div class="project__wrapper" data-tilt>
+                            <img src="./image/portfo.png" alt="Portfolio website screenshot" class="project__img">
                             <div class="project__description">
                                 <h3 class="project__description--title">My Portfolio</h3>
-                                <h4 class="project__description--sub-title">HTML, CSS and JavaScript</h4>
+                                <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
                                 <p class="project__description--para">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, scelerisque sed odio eget, luctus faucibus augue. Fusce volutpat iaculis dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id eleifend libero. In hac habitasse platea dictumst.  
-                                    </p>
+                                    The site you're looking at! A fully responsive personal portfolio featuring dark
+                                    mode, scroll animations and an interactive tech-stack section.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://isaactls.github.io" target="_blank" rel="noopener"
+                                        class="project__link">Live site <i class="fas fa-external-link-alt"></i></a>
+                                </div>
                             </div>
                         </div>
                     </li>
-                    <li class="project">
-                        <div class="project__wrapper">
-                            <img src="./image/library.png" alt="" class="project__img">
+                    <li class="project reveal">
+                        <div class="project__wrapper" data-tilt>
+                            <img src="./image/library.png" alt="Library management system screenshot" class="project__img">
                             <div class="project__description">
-                                <h3 class="project__description--title">Admas University library management system</h3>
-                                <h4 class="project__description--sub-title">HTML, CSS,JavaScript</h4>
+                                <h3 class="project__description--title">Admas University Library Management System</h3>
+                                <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
                                 <p class="project__description--para">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, scelerisque sed odio eget, luctus faucibus augue. Fusce volutpat iaculis dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id eleifend libero. In hac habitasse platea dictumst.  
-                                    </p>
+                                    A library management system for Admas University that handles book cataloging,
+                                    borrowing and returning, and member records.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://github.com/isaactls" target="_blank" rel="noopener"
+                                        class="project__link">Code <i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                     </li>
-                    <li class="project">
-                        <div class="project__wrapper">
-                            <img src="./image/little_lemon.png" alt="" class="project__img">
+                    <li class="project reveal">
+                        <div class="project__wrapper" data-tilt>
+                            <img src="./image/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img">
                             <div class="project__description">
-                                <h3 class="project__description--title">Little lemon Restaurant</h3>
-                                <h4 class="project__description--sub-title">React js</h4>
+                                <h3 class="project__description--title">Little Lemon Restaurant</h3>
+                                <h4 class="project__description--sub-title">React JS</h4>
                                 <p class="project__description--para">
-                                      https://poetic-platypus-766ad9.netlify.app/
-                                    </p>
+                                    A restaurant web app built with React featuring table reservation, menu browsing
+                                    and an interactive ordering flow.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://poetic-platypus-766ad9.netlify.app/" target="_blank" rel="noopener"
+                                        class="project__link">Live site <i class="fas fa-external-link-alt"></i></a>
+                                </div>
                             </div>
                         </div>
                     </li>
-                    <li class="project">
-                        <div class="project__wrapper">
-                            <img src="./image/w_app.png" alt="" class="project__img">
+                    <li class="project reveal">
+                        <div class="project__wrapper" data-tilt>
+                            <img src="./image/w_app.png" alt="Weather app screenshot" class="project__img">
                             <div class="project__description">
-                                <h3 class="project__description--title">weather app</h3>
-                                <h4 class="project__description--sub-title">React js</h4>
+                                <h3 class="project__description--title">Weather App</h3>
+                                <h4 class="project__description--sub-title">React JS &amp; Weather API</h4>
                                 <p class="project__description--para">
-                                      https://isaactls.github.io/PRODIGY_WD_05/
-                                    </p>
+                                    A live weather dashboard that fetches real-time conditions and forecasts for any
+                                    city, with dynamic icons and a clean UI.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://isaactls.github.io/PRODIGY_WD_05/" target="_blank" rel="noopener"
+                                        class="project__link">Live site <i class="fas fa-external-link-alt"></i></a>
+                                </div>
                             </div>
                         </div>
                     </li>
-                    <li class="project">
-                        <div class="project__wrapper">
-                            <img src="./image/age.png" alt="" class="project__img">
+                    <li class="project reveal">
+                        <div class="project__wrapper" data-tilt>
+                            <img src="./image/age.png" alt="Age calculator app screenshot" class="project__img">
                             <div class="project__description">
-                                <h3 class="project__description--title">age calculator</h3>
-                                <h4 class="project__description--sub-title">React js</h4>
+                                <h3 class="project__description--title">Age Calculator</h3>
+                                <h4 class="project__description--sub-title">React JS</h4>
                                 <p class="project__description--para">
-                                      https://isaactls.github.io/age-calculator-app/
-                                    </p>
+                                    An age calculator that computes exact age in years, months and days from any
+                                    date of birth, with instant validation.
+                                </p>
+                                <div class="project__description--links">
+                                    <a href="https://isaactls.github.io/age-calculator-app/" target="_blank" rel="noopener"
+                                        class="project__link">Live site <i class="fas fa-external-link-alt"></i></a>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -180,38 +228,57 @@
             </div>
         </div>
     </section>
+
     <footer>
         <div class="row footer__row">
-            <a href="#" class="footer__anchor">
+            <a href="#about-me" class="footer__anchor" aria-label="Back to top">
                 <figure class="footer__logo">
                     <img src="./image/logo.svg" alt="" class="footer__logo--img">
                 </figure>
                 <span class="footer__logo--popper">
-                    Top 
+                    Top
                     <i class="fas fa-arrow-up"></i>
                 </span>
             </a>
             <div class="footer__social--list">
-                <a href="https://github.com/isaactls" class="footer__social--link 
-                link__hover-effect 
-                link__hover-effet--white" target="_blank">github</a>
-                <a href="https://www.linkedin.com/in/yisehak-tolesa-0144bb221/" class="footer__social--link 
-                link__hover-effect 
-                link__hover-effet--white" target="_blank">Linkedin</a>
-                <a href="https://www.google.com" class="footer__social--link 
-                link__hover-effect 
-                link__hover-effet--white" target="_blank">-</a>
-                <a href="https://www.google.com" class="footer__social--link 
-                link__hover-effect 
-                link__hover-effet--white" target="_blank">-</a>
+                <a href="https://github.com/isaactls" target="_blank" rel="noopener"
+                    class="footer__social--link link__hover-effect link__hover-effect--white">GitHub</a>
+                <a href="https://www.linkedin.com/in/yisehak-tolesa-0144bb221/" target="_blank" rel="noopener"
+                    class="footer__social--link link__hover-effect link__hover-effect--white">LinkedIn</a>
+                <a href="#" data-open-modal
+                    class="footer__social--link link__hover-effect link__hover-effect--white">Email</a>
             </div>
-            <div class="footer__copy--right"> &copy; isaac</div>
+            <div class="footer__copy--right">&copy; <span id="year"></span> Yisehak Tolesa</div>
         </div>
     </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Contact modal -->
+    <div class="modal" id="contactModal" aria-hidden="true">
+        <div class="modal__backdrop" data-close-modal></div>
+        <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+            <button class="modal__close" data-close-modal aria-label="Close">&times;</button>
+            <h2 id="contactTitle" class="modal__title">Let's get in touch</h2>
+            <p class="modal__subtitle">Have a project in mind or just want to say hi? Send me a message!</p>
+            <button class="copy-email" id="copyEmail" title="Click to copy">
+                <i class="far fa-envelope"></i> isacktolesa@gmail.com <i class="far fa-copy"></i>
+            </button>
+            <form id="contactForm" class="contact-form">
+                <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+                <input type="email" name="email" placeholder="Your email" required aria-label="Your email">
+                <textarea name="message" rows="4" placeholder="Your message" required
+                    aria-label="Your message"></textarea>
+                <button type="submit" class="btn btn--primary">Send message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 
 </html>
-
-
-
-
