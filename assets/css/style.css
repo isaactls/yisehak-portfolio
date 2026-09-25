@@ -178,13 +178,19 @@ a {
 }
 
 /* ========== NAVIGATION ========== */
+/* Original look; pins with frosted glass while scrolling, then releases and
+   scrolls away once the hero is passed. */
 #navbar {
   position: sticky;
   top: 0;
-  z-index: 500;
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background-color 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+/* Past the release point: stop sticking and scroll away with the content */
+#navbar.nav--released {
+  position: relative;
 }
 
 #navbar.nav--scrolled {

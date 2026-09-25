@@ -90,11 +90,21 @@
   const navbar = document.getElementById('navbar');
   const progressBar = document.getElementById('progressBar');
   const backToTop = document.getElementById('backToTop');
+  const navHeight = navbar ? navbar.offsetHeight : 100;
 
   function onScroll() {
     const scrollY = window.scrollY;
 
-    if (navbar) navbar.classList.toggle('nav--scrolled', scrollY > 10);
+    if (navbar) {
+      navbar.classList.toggle('nav--scrolled', scrollY > 10);
+
+      // Header sticks for the hero area, then releases and scrolls away
+      const hero = document.getElementById('about-me');
+      if (hero) {
+        const releasePoint = hero.offsetHeight - navHeight;
+        navbar.classList.toggle('nav--released', scrollY > releasePoint);
+      }
+    }
 
     if (progressBar) {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
