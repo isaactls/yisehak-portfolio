@@ -2,6 +2,7 @@
 
 /* ========== THEME VARIABLES ========== */
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --bg-alt: #f8f8f8;
   --text: #242424;
@@ -14,25 +15,37 @@
   --overlay: #1c1d25;
 }
 
+::selection {
+  background: rgba(96, 48, 177, 0.22);
+}
+
+/* Midnight violet palette: deep blue-black surfaces, brighter periwinkle
+   accent for contrast, softer muted text */
 [data-theme="dark"] {
-  --bg: #12131a;
-  --bg-alt: #1a1c26;
-  --text: #ededf2;
-  --text-muted: #a2a5b3;
-  --card-bg: #22242f;
-  --nav-bg: rgba(18, 19, 26, 0.65);
-  --purple: #7c5cff;
-  --purple-hover: #9a7bff;
+  color-scheme: dark;
+  --bg: #0e1016;
+  --bg-alt: #151824;
+  --text: #e9ebf5;
+  --text-muted: #9ca3b8;
+  --card-bg: #1a1e2c;
+  --nav-bg: rgba(14, 16, 22, 0.72);
+  --purple: #8b78ff;
+  --purple-hover: #a795ff;
   --shadow: rgba(0, 0, 0, 0.75);
-  --overlay: #0d0e14;
+  --overlay: #090a10;
+}
+
+[data-theme="dark"] ::selection {
+  background: rgba(139, 120, 255, 0.45);
+  color: #fff;
 }
 
 [data-theme="dark"] footer {
-  background-color: #101116;
+  background-color: #0b0d13;
 }
 
 [data-theme="dark"] .hero__name {
-  background: linear-gradient(90deg, #7c5cff, #9a7bff, #7c5cff);
+  background: linear-gradient(90deg, #8b78ff, #c3b8ff, #8b78ff);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -40,11 +53,16 @@
 }
 
 [data-theme="dark"] .hero__glow--1 {
-  background: radial-gradient(circle, rgba(124, 92, 255, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(139, 120, 255, 0.38), transparent 70%);
 }
 
 [data-theme="dark"] .hero__glow--2 {
-  background: radial-gradient(circle, rgba(154, 123, 255, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.3), transparent 70%);
+}
+
+/* Pure-black logos (GitHub) vanish on dark surfaces — lift them to white */
+[data-theme="dark"] .language__img[src*="25231"] {
+  filter: invert(1);
 }
 
 * {
@@ -394,28 +412,92 @@ nav {
   background-color: var(--purple-hover);
 }
 
-/* ========== MODE TOGGLE ========== */
+/* ========== MODE TOGGLE (sun/moon pill switch) ========== */
 .mode {
   position: fixed;
   top: 96px;
   right: 24px;
-  height: 40px;
   z-index: 450;
 }
 
-.mode img {
+.mode-toggle {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 32px;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: transform 400ms ease;
-  background-color: var(--card-bg);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-  padding: 4px;
+  padding: 0;
+  background: linear-gradient(135deg, #e6ddfb 0%, #d2c4f4 100%);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(96, 48, 177, 0.18);
+  transition: background 300ms ease, box-shadow 300ms ease, transform 200ms ease;
 }
 
-.mode img:hover {
-  transform: rotate(30deg) scale(1.15);
+.mode-toggle:hover {
+  transform: scale(1.06);
+}
+
+.mode-toggle:active {
+  transform: scale(0.97);
+}
+
+.mode-toggle:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}
+
+.mode-toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 300ms ease;
+}
+
+.mode-toggle__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 13px;
+  transition: opacity 250ms ease, transform 350ms ease;
+}
+
+.mode-toggle__icon--sun {
+  color: #f59e0b;
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.mode-toggle__icon--moon {
+  color: #8b78ff;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.4);
+}
+
+[data-theme="dark"] .mode-toggle {
+  background: linear-gradient(135deg, #3d3f73 0%, #232644 100%);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .mode-toggle__thumb {
+  transform: translateX(32px);
+  background: #161a2e;
+}
+
+[data-theme="dark"] .mode-toggle__icon--sun {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.4);
+}
+
+[data-theme="dark"] .mode-toggle__icon--moon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  color: #c3b8ff;
 }
 
 /* ========== ABOUT ME ========== */
@@ -898,6 +980,7 @@ nav {
 /* ========== FOOTER ========== */
 footer {
   background-color: #242424;
+  transition: background-color 300ms ease;
 }
 
 .footer__row {

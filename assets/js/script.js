@@ -8,12 +8,14 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Theme (dark mode) ---------- */
-  const modeImg = document.querySelector('.mode img');
+  const modeToggle = document.getElementById('modeToggle');
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    if (modeImg) {
-      modeImg.src = theme === 'dark' ? './assets/images/night.png' : './assets/images/light.png';
+    if (modeToggle) {
+      const dark = theme === 'dark';
+      modeToggle.setAttribute('aria-checked', String(dark));
+      modeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
     }
   }
 
@@ -26,8 +28,8 @@
     }
   } catch (e) { /* localStorage unavailable */ }
 
-  if (modeImg) {
-    modeImg.addEventListener('click', () => {
+  if (modeToggle) {
+    modeToggle.addEventListener('click', () => {
       const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
@@ -249,7 +251,7 @@
       }
 
       try {
-        await fetch('https://formsubmit.co/ajax/isacktolesa@gmail.com', {
+        const res = await fetch('https://formsubmit.co/ajax/isacktolesa@gmail.com', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
@@ -257,9 +259,14 @@
             email: email,
             message: message,
             _subject: `Portfolio message from ${name}`,
-            _template: 'table'
+            _template: 'table',
+            _captcha: 'false',
+            _replyto: email,
+            _autoresponse: `Hi ${name}, thanks for reaching out through my portfolio! I received your message and will reply to this email soon. — Yisehak`
           })
         });
+
+        if (!res.ok) throw new Error(`FormSubmit responded with ${res.status}`);
 
         showToast('Message sent! I\'ll get back to you soon. ✅');
         contactForm.reset();
