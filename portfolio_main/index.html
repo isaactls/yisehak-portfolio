@@ -6,18 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Yisehak Tolesa — Computer Scientist and front-end developer building responsive, performant web applications.">
     <meta name="theme-color" content="#6030b1">
+    <link rel="canonical" href="https://isaactls.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Yisehak Tolesa — Portfolio">
+    <meta property="og:description" content="Yisehak Tolesa — Computer Scientist and front-end developer building responsive, performant web applications.">
+    <meta property="og:url" content="https://isaactls.github.io/">
+    <meta property="og:image" content="https://isaactls.github.io/portfolio_main/image/portfo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yisehak Tolesa — Portfolio">
+    <meta name="twitter:description" content="Computer Scientist and front-end developer building responsive, performant web applications.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Yisehak Tolesa",
+      "url": "https://isaactls.github.io/",
+      "jobTitle": "Front-End Developer",
+      "sameAs": [
+        "https://github.com/isaactls",
+        "https://www.linkedin.com/in/yisehak-tolesa-0144bb221/"
+      ]
+    }
+    </script>
     <title>Yisehak Tolesa — Portfolio</title>
     <link rel="icon" href="./image/logo.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-    <script src="./script.js?v=3" defer></script>
+    <script src="./script.js?v=4" defer></script>
 </head>
 
 <body>
     <!-- Reading progress bar -->
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+    <main>
 
     <section id="about-me">
         <nav id="navbar" aria-label="Main navigation">
@@ -40,10 +64,14 @@
 
         <!-- Mobile menu -->
         <div class="mobile-menu" id="mobileMenu">
+            <button class="mobile-menu__close" aria-label="Close menu">&times;</button>
             <a href="#languages" class="mobile-menu__link">Language</a>
             <a href="#projects" class="mobile-menu__link">Projects</a>
             <a href="#" data-open-modal class="mobile-menu__link mobile-menu__link--primary">Contact</a>
         </div>
+
+        <!-- Dim overlay behind mobile menu -->
+        <div class="overlay" id="overlay"></div>
 
         <div class="mode">
             <img src="./image/light.png" alt="Toggle dark mode" id="modeToggle" width="40" height="40">
@@ -141,7 +169,7 @@
                 <ul class="project__list">
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/portfo.png" alt="Portfolio website screenshot" class="project__img">
+                            <img src="./image/portfo.png" alt="Portfolio website screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">My Portfolio</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -158,7 +186,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/library.png" alt="Library management system screenshot" class="project__img">
+                            <img src="./image/library.png" alt="Library management system screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Admas University Library Management System</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -175,7 +203,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img">
+                            <img src="./image/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Little Lemon Restaurant</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
@@ -192,7 +220,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/w_app.png" alt="Weather app screenshot" class="project__img">
+                            <img src="./image/w_app.png" alt="Weather app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Weather App</h3>
                                 <h4 class="project__description--sub-title">React JS &amp; Weather API</h4>
@@ -209,7 +237,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/age.png" alt="Age calculator app screenshot" class="project__img">
+                            <img src="./image/age.png" alt="Age calculator app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Age Calculator</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
@@ -229,11 +257,13 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         <div class="row footer__row">
             <a href="#about-me" class="footer__anchor" aria-label="Back to top">
                 <figure class="footer__logo">
-                    <img src="./image/logo.svg" alt="" class="footer__logo--img">
+                    <span class="footer__logo--text">Yisehak<span class="footer__logo--accent">.</span>Tolesa</span>
                 </figure>
                 <span class="footer__logo--popper">
                     Top
@@ -264,9 +294,6 @@
             <button class="modal__close" data-close-modal aria-label="Close">&times;</button>
             <h2 id="contactTitle" class="modal__title">Let's get in touch</h2>
             <p class="modal__subtitle">Have a project in mind or just want to say hi? Send me a message!</p>
-            <button class="copy-email" id="copyEmail" title="Click to copy">
-                <i class="far fa-envelope"></i> isacktolesa@gmail.com <i class="far fa-copy"></i>
-            </button>
             <form id="contactForm" class="contact-form">
                 <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
                 <input type="email" name="email" placeholder="Your email" required aria-label="Your email">

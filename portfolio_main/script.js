@@ -9,10 +9,9 @@
 
   /* ---------- Theme (dark mode) ---------- */
   const modeImg = document.querySelector('.mode img');
-  const html = document.documentElement;
 
   function applyTheme(theme) {
-    html.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
     if (modeImg) {
       modeImg.src = theme === 'dark' ? './image/night.png' : './image/light.png';
     }
@@ -29,7 +28,7 @@
 
   if (modeImg) {
     modeImg.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
       try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
     });
@@ -97,7 +96,7 @@
     el.appendChild(label);
   });
 
-  /* ---------- Navbar shadow + progress bar + back-to-top (one scroll handler) ---------- */
+  /* ---------- Navbar shadow + progress bar + back-to-top ---------- */
   const navbar = document.getElementById('navbar');
   const progressBar = document.getElementById('progressBar');
   const backToTop = document.getElementById('backToTop');
@@ -129,22 +128,75 @@
     });
   }
 
-  /* ---------- Mobile menu ---------- */
+  /* ---------- Mobile menu (hamburger) ---------- */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('overlay');
+  const menuClose = document.querySelector('.mobile-menu__close');
 
   function setMenu(open) {
+    if (!hamburger || !mobileMenu) return;
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', String(open));
     mobileMenu.classList.toggle('open', open);
+    if (menuOverlay) menuOverlay.classList.toggle('visible', open);
     body.style.overflow = open ? 'hidden' : '';
   }
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
-
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => setMenu(false));
+    });
+  }
+  if (menuClose) menuClose.addEventListener('click', () => setMenu(false));
+  if (menuOverlay) menuOverlay.addEventListener('click', () => setMenu(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+
+  /* ---------- Custom cursor (dot + trailing ring) ---------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    body.append(dot, ring);
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let started = false;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+      body.classList.add('cursor-active');
+
+      if (!started) {
+        ringX = mouseX;
+        ringY = mouseY;
+        ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+        started = true;
+        requestAnimationFrame(animateRing);
+      }
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+      requestAnimationFrame(animateRing);
+    }
+
+    document.addEventListener('mouseleave', () => body.classList.remove('cursor-active'));
+
+    // Grow the ring over anything interactive
+    document.querySelectorAll('a, button, .language, .project__wrapper, input, textarea').forEach((el) => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
     });
   }
 
@@ -182,43 +234,48 @@
     });
   }
 
-  /* ---------- Copy email ---------- */
-  const copyBtn = document.getElementById('copyEmail');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', async () => {
-      const email = 'isacktolesa@gmail.com';
-      try {
-        await navigator.clipboard.writeText(email);
-        showToast('Email copied to clipboard! 📋');
-      } catch (err) {
-        // Fallback for older browsers
-        const ta = document.createElement('textarea');
-        ta.value = email;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('Email copied to clipboard! 📋');
-      }
-    });
-  }
-
-  /* ---------- Contact form -> mailto ---------- */
+  /* ---------- Contact form: private submission (no email shown) ---------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const fd = new FormData(contactForm);
       const name = (fd.get('name') || '').trim();
       const email = (fd.get('email') || '').trim();
       const message = (fd.get('message') || '').trim();
 
-      const subject = encodeURIComponent(`Portfolio message from ${name}`);
-      const bodyText = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-      window.location.href = `mailto:isacktolesa@gmail.com?subject=${subject}&body=${bodyText}`;
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending… <i class="fas fa-spinner fa-spin"></i>';
+      }
 
-      showToast('Opening your email app… ✉️');
-      closeModal();
+      try {
+        await fetch('https://formsubmit.co/ajax/isacktolesa@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+            _subject: `Portfolio message from ${name}`,
+            _template: 'table'
+          })
+        });
+
+        showToast('Message sent! I\'ll get back to you soon. ✅');
+        contactForm.reset();
+        setTimeout(closeModal, 900);
+      } catch (err) {
+        showToast('Something went wrong — please try again. ❌');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      }
     });
   }
 
@@ -230,12 +287,11 @@
     toast.textContent = message;
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
   /* ---------- Auto year in footer ---------- */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Language level tooltip injected above ---------- */
 })();
