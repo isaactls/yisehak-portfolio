@@ -11,7 +11,7 @@
     <meta property="og:title" content="Yisehak Tolesa — Portfolio">
     <meta property="og:description" content="Yisehak Tolesa — Computer Scientist and front-end developer building responsive, performant web applications.">
     <meta property="og:url" content="https://isaactls.github.io/yisehak-portfolio/">
-    <meta property="og:image" content="https://isaactls.github.io/yisehak-portfolio/image/portfo.png">
+    <meta property="og:image" content="https://isaactls.github.io/yisehak-portfolio/assets/images/portfo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Yisehak Tolesa — Portfolio">
     <meta name="twitter:description" content="Computer Scientist and front-end developer building responsive, performant web applications.">
@@ -29,17 +29,46 @@
     }
     </script>
     <title>Yisehak Tolesa — Portfolio</title>
-    <link rel="icon" href="./image/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-    <script src="./script.js?v=5" defer></script>
+    <script src="./assets/js/script.js?v=6" defer></script>
 </head>
 
 <body>
     <!-- Reading progress bar -->
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+    <nav id="navbar" aria-label="Main navigation">
+        <a href="#about-me" class="personal__logo">Yisehak Tolesa</a>
+        <ul class="nav__link--list">
+            <li class="nav__link"><a href="#languages"
+                    class="nav__link--anchor link__hover-effect link__hover-effect--black">Language</a>
+            </li>
+            <li class="nav__link"><a href="#projects"
+                    class="nav__link--anchor link__hover-effect link__hover-effect--black">Projects</a>
+            </li>
+            <li class="nav__link"><a href="#" data-open-modal
+                    class="nav__link--anchor nav__link--anchor-primary">Contact</a>
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu__close" aria-label="Close menu">&times;</button>
+        <a href="#languages" class="mobile-menu__link">Language</a>
+        <a href="#projects" class="mobile-menu__link">Projects</a>
+        <a href="#" data-open-modal class="mobile-menu__link mobile-menu__link--primary">Contact</a>
+    </div>
+
+    <!-- Dim overlay behind mobile menu -->
+    <div class="overlay" id="overlay"></div>
 
     <main>
 
@@ -48,37 +77,8 @@
         <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
         <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
 
-        <nav id="navbar" aria-label="Main navigation">
-            <a href="#about-me" class="personal__logo">Yisehak<span class="text--purple">.</span></a>
-            <ul class="nav__link--list">
-                <li class="nav__link"><a href="#languages"
-                        class="nav__link--anchor link__hover-effect link__hover-effect--black">Language</a>
-                </li>
-                <li class="nav__link"><a href="#projects"
-                        class="nav__link--anchor link__hover-effect link__hover-effect--black">Projects</a>
-                </li>
-                <li class="nav__link"><a href="#" data-open-modal
-                        class="nav__link--anchor nav__link--anchor-primary">Contact</a>
-                </li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-
-        <!-- Mobile menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <button class="mobile-menu__close" aria-label="Close menu">&times;</button>
-            <a href="#languages" class="mobile-menu__link">Language</a>
-            <a href="#projects" class="mobile-menu__link">Projects</a>
-            <a href="#" data-open-modal class="mobile-menu__link mobile-menu__link--primary">Contact</a>
-        </div>
-
-        <!-- Dim overlay behind mobile menu -->
-        <div class="overlay" id="overlay"></div>
-
         <div class="mode">
-            <img src="./image/light.png" alt="Toggle dark mode" id="modeToggle" width="40" height="40">
+            <img src="./assets/images/light.png" alt="Toggle dark mode" id="modeToggle" width="40" height="40">
         </div>
 
         <div class="flex-1 flex">
@@ -86,7 +86,7 @@
                 <div class="about-me__info--container">
                     <span class="hero__badge"><i class="fas fa-circle"></i> Available for opportunities</span>
                     <figure class="about-me__picture--mask">
-                        <img src="./image/my pic.jpg" alt="Picture of Yisehak Tolesa" class="about-me__picture">
+                        <img src="./assets/images/my pic.jpg" alt="Picture of Yisehak Tolesa" class="about-me__picture">
                     </figure>
                     <h1 class="about-me__info--title">Hey! I'm <span class="text--purple hero__name">Yisehak Tolesa</span>&nbsp;<span
                             class="wave">👋</span></h1>
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <figure class="about-me__img--container">
-                    <img src="./image/undraw_websites.svg" alt="" class="about-me__img about-me__img--float">
+                    <img src="./assets/images/undraw_websites.svg" alt="" class="about-me__img about-me__img--float">
                 </figure>
             </div>
         </div>
@@ -134,42 +134,42 @@
             <div class="row">
                 <h1 class="section__title reveal">This is my <span class="text--purple">technology stack</span></h1>
                 <div class="language__list">
-                    <div class="language reveal" data-level="90">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/500px-HTML5_logo_and_wordmark.svg.png"
                                 alt="HTML" class="language__img">
                         </figure>
                         <span class="language__name">HTML</span>
                     </div>
-                    <div class="language reveal" data-level="85">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png" alt="CSS"
                                 class="language__img">
                         </figure>
                         <span class="language__name">CSS</span>
                     </div>
-                    <div class="language reveal" data-level="80">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://api.badgr.io/public/badges/yKvg6q5wRDm_vgQzpzc5nQ/image" alt="JavaScript"
                                 class="language__img">
                         </figure>
                         <span class="language__name">JavaScript</span>
                     </div>
-                    <div class="language reveal" data-level="75">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/3840px-React-icon.svg.png"
                                 alt="React" class="language__img">
                         </figure>
                         <span class="language__name">React JS</span>
                     </div>
-                    <div class="language reveal" data-level="70">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://www.freepnglogos.com/uploads/logo-mysql-png/logo-mysql-mysql-logo-png-images-are-download-crazypng-21.png"
                                 alt="MySQL" class="language__img">
                         </figure>
                         <span class="language__name">MySQL</span>
                     </div>
-                    <div class="language reveal" data-level="85">
+                    <div class="language reveal">
                         <figure class="language__img--wrapper">
                             <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"
                                 class="language__img">
@@ -188,7 +188,7 @@
                 <ul class="project__list">
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/portfo.png" alt="Portfolio website screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/portfo.png" alt="Portfolio website screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">My Portfolio</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -205,7 +205,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/library.png" alt="Library management system screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/library.png" alt="Library management system screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Admas University Library Management System</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -222,7 +222,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Little Lemon Restaurant</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
@@ -239,7 +239,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/w_app.png" alt="Weather app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/w_app.png" alt="Weather app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Weather App</h3>
                                 <h4 class="project__description--sub-title">React JS &amp; Weather API</h4>
@@ -256,7 +256,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./image/age.png" alt="Age calculator app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/age.png" alt="Age calculator app screenshot" class="project__img" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Age Calculator</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
