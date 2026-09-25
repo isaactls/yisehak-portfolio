@@ -98,12 +98,11 @@
     if (navbar) {
       navbar.classList.toggle('nav--scrolled', scrollY > 10);
 
-      // Header may stick through the hero and tech-stack sections; once the
-      // projects section arrives it slides away like every other element.
+      // Once the projects section arrives, the header slides up and away
       const stickZone = document.getElementById('languages');
       if (stickZone) {
         const releasePoint = stickZone.offsetTop + stickZone.offsetHeight - navHeight;
-        navbar.classList.toggle('nav--released', scrollY > releasePoint);
+        navbar.classList.toggle('nav--hidden', scrollY > releasePoint);
       }
     }
 
@@ -144,6 +143,7 @@
     mobileMenu.classList.toggle('open', open);
     if (menuOverlay) menuOverlay.classList.toggle('visible', open);
     body.style.overflow = open ? 'hidden' : '';
+    body.classList.toggle('menu-open', open);
   }
 
   if (hamburger && mobileMenu) {
