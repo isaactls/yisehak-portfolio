@@ -1171,6 +1171,19 @@ footer {
   margin-top: 6px;
 }
 
+/* Honeypot: visually removed but technically fillable.
+   Kept off-screen instead of display:none because some bots
+   skip fields that are display:none. */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ========== TOAST ========== */
 .toast {
   position: fixed;
