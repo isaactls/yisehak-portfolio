@@ -324,11 +324,11 @@ nav {
 
 /* ========== MODE TOGGLE ========== */
 .mode {
-  position: absolute;
+  position: fixed;
   top: 96px;
   right: 24px;
   height: 40px;
-  z-index: 400;
+  z-index: 450;
 }
 
 .mode img {
@@ -337,6 +337,9 @@ nav {
   height: 40px;
   border-radius: 50%;
   transition: transform 400ms ease;
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  padding: 4px;
 }
 
 .mode img:hover {
@@ -935,7 +938,7 @@ footer {
   }
 
   .mode {
-    top: 84px;
+    top: 82px;
     right: 16px;
   }
 
