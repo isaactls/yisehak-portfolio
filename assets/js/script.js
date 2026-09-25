@@ -91,6 +91,7 @@
   const progressBar = document.getElementById('progressBar');
   const backToTop = document.getElementById('backToTop');
   const navHeight = navbar ? navbar.offsetHeight : 100;
+  const aboutContainer = document.querySelector('.about-me__info--container');
 
   function onScroll() {
     const scrollY = window.scrollY;
@@ -98,12 +99,11 @@
     if (navbar) {
       navbar.classList.toggle('nav--scrolled', scrollY > 10);
 
-      // Header exists only over the hero: once the about-me section is done
-      // (tech-stack section reaches the header), it slides up and away
-      const nextSection = document.getElementById('languages');
-      if (nextSection) {
-        const releasePoint = nextSection.offsetTop - navHeight;
-        navbar.classList.toggle('nav--hidden', scrollY > releasePoint);
+      // Header exists only over the hero: once the about-me info container
+      // has scrolled past the header, the nav slides up and away
+      if (aboutContainer) {
+        const rect = aboutContainer.getBoundingClientRect();
+        navbar.classList.toggle('nav--hidden', rect.bottom < navHeight);
       }
     }
 
