@@ -188,17 +188,23 @@ a {
   transition: background-color 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
 }
 
-/* Past the release point: stop sticking and scroll away with the content */
-#navbar.nav--released {
-  position: relative;
-}
-
 #navbar.nav--scrolled {
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-bottom-color: rgba(96, 48, 177, 0.12);
+}
+
+/* Past the release point (projects section): stop sticking, drop the glass,
+   and scroll away with the content like every other element */
+#navbar.nav--released {
+  position: relative;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-bottom-color: transparent;
 }
 
 nav {
