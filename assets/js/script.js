@@ -259,13 +259,12 @@
     });
   }
 
-  /* ---------- Contact form: honeypot + validation + robust submit ---------- */
+  /* ---------- Contact form: validation + honeypot (FormSubmit handles delivery) ---------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/isacktolesa@gmail.com';
     const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const fd = new FormData(contactForm);
@@ -274,7 +273,6 @@
       const message = (fd.get('message') || '').trim();
 
       // 1) Honeypot: real users never see this field, so a filled one means a bot.
-      //    We fake success so bots don't learn the form is protected.
       if ((fd.get('_honey') || '').trim() !== '') {
         contactForm.reset();
         showToast('Message sent! I\'ll get back to you soon. ✅');
@@ -296,58 +294,9 @@
         return;
       }
 
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending… <i class="fas fa-spinner fa-spin"></i>';
-      }
-
-      // 3) Abort after 15s so the user never hangs on a dead request.
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-      try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-            _subject: `Portfolio message from ${name}`,
-            _template: 'table',
-            _captcha: 'false',
-            _replyto: email,
-            _autoresponse: `Hi ${name}, thanks for reaching out through my portfolio! I received your message and will reply to this email soon. — Yisehak`
-          }),
-          signal: controller.signal
-        });
-
-        if (!res.ok) {
-          const errorText = await res.text().catch(() => '');
-          throw new Error(`FormSubmit ${res.status}: ${errorText}`);
-        }
-
-        showToast('Message sent! I\'ll get back to you soon. ✅');
-        contactForm.reset();
-        setTimeout(closeModal, 900);
-      } catch (err) {
-        const offline = !navigator.onLine;
-        const aborted = err && err.name === 'AbortError';
-        console.error('FormSubmit error:', err.message);
-        showToast(offline
-          ? 'You appear to be offline — please try again. 📡'
-          : aborted
-            ? 'The request timed out — please try again. ⏳'
-            : `Something went wrong: ${err.message}`);
-      } finally {
-        clearTimeout(timeoutId);
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-        }
-      }
+      // 3) Submit the form normally (FormSubmit handles email delivery)
+      closeModal();
+      contactForm.submit();
     });
   }
 

@@ -62,7 +62,7 @@
         })(window, document, "clarity", "script", "ynzudywheq");
     </script>
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js?v=21" defer></script>
+    <script src="./assets/js/script.js?v=22" defer></script>
 </head>
 
 <body>
@@ -352,7 +352,7 @@
             <button class="modal__close" data-close-modal aria-label="Close">&times;</button>
             <h2 id="contactTitle" class="modal__title">Let's get in touch</h2>
             <p class="modal__subtitle">Have a project in mind or just want to say hi? Send me a message!</p>
-            <form id="contactForm" class="contact-form" novalidate>
+            <form id="contactForm" class="contact-form" action="https://formsubmit.co/isacktolesa@gmail.com" method="POST" novalidate>
                 <input type="text" name="name" placeholder="Your name" required aria-label="Your name" autocomplete="name" spellcheck="false">
                 <input type="email" name="email" placeholder="Your email" required aria-label="Your email" autocomplete="email" inputmode="email">
                 <textarea name="message" rows="4" placeholder="Your message" required
@@ -360,6 +360,10 @@
                 <!-- Honeypot: hidden from humans, bots love filling this in -->
                 <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off"
                     aria-hidden="true">
+                <input type="hidden" name="_subject" value="Portfolio message from Yisehak's site">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://isaactls.github.io/yisehak-portfolio/">
                 <button type="submit" class="btn btn--primary">Send message <i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
