@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
+/* ========== SKIP TO CONTENT LINK (accessibility) ========== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--purple);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 0 0 12px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 2000;
+  transition: top 200ms ease;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  color: #fff;
+  outline: 3px solid var(--purple-hover);
+  outline-offset: 2px;
+}
+
 /* ========== THEME VARIABLES ========== */
 :root {
   color-scheme: light;

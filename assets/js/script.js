@@ -200,8 +200,10 @@
 
   /* ---------- Contact modal ---------- */
   const modal = document.getElementById('contactModal');
+  let lastFocusedElement = null;
 
   function openModal() {
+    lastFocusedElement = document.activeElement;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     body.style.overflow = 'hidden';
@@ -213,6 +215,31 @@
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     body.style.overflow = '';
+    if (lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  // Focus trap: keep Tab/Shift+Tab cycling inside the modal while it is open
+  if (modal) {
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !modal.classList.contains('open')) return;
+
+      const focusableSelectors = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusable = Array.from(modal.querySelectorAll(focusableSelectors)).filter(
+        (el) => el.offsetParent !== null || el === document.activeElement
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
   }
 
   document.querySelectorAll('[data-open-modal]').forEach((el) => {

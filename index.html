@@ -10,6 +10,7 @@
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="CP7rQH1uwMX6BT1mHiNYGHFu96j3hbmQxaSF294s-oY" />
     <meta name="theme-color" content="#6030b1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.clarity.ms; frame-src 'none'; base-uri 'self'; form-action 'self'">
     <link rel="canonical" href="https://isaactls.github.io/yisehak-portfolio/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Yisehak (Isaac) Tolesa — Portfolio">
@@ -35,9 +36,11 @@
     </script>
     <title>Yisehak (Isaac) Tolesa — Portfolio | Front-End Developer</title>
     <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/images/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="./assets/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="assets/css/style.css?v=15">
+    <link rel="stylesheet" href="assets/css/style.css?v=16">
     <!-- Microsoft Clarity analytics -->
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
@@ -47,10 +50,13 @@
         })(window, document, "clarity", "script", "ynzudywheq");
     </script>
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js?v=17" defer></script>
+    <script src="./assets/js/script.js?v=18" defer></script>
 </head>
 
 <body>
+    <!-- Skip to content link (accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Reading progress bar -->
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
@@ -83,7 +89,7 @@
     <!-- Dim overlay behind mobile menu -->
     <div class="overlay" id="overlay"></div>
 
-    <main>
+    <main id="main-content">
 
     <section id="about-me">
         <!-- Ambient background glows -->
@@ -105,7 +111,7 @@
                 <div class="about-me__info--container">
                     <span class="hero__badge"><i class="fas fa-circle"></i> Available for opportunities</span>
                     <figure class="about-me__picture--mask">
-                        <img src="./assets/images/my pic.jpg" alt="Picture of Yisehak Tolesa" class="about-me__picture">
+                        <img src="./assets/images/my pic.jpg" alt="Picture of Yisehak Tolesa" class="about-me__picture" width="1980" height="2640" loading="lazy">
                     </figure>
                     <h1 class="about-me__info--title">Hey! I'm <span class="text--purple hero__name">Yisehak Tolesa</span>&nbsp;<span
                             class="wave">👋</span></h1>
@@ -142,7 +148,7 @@
                     </div>
                 </div>
                 <figure class="about-me__img--container">
-                    <img src="./assets/images/undraw_websites.svg" alt="" class="about-me__img about-me__img--float">
+                    <img src="./assets/images/undraw_websites.svg" alt="" class="about-me__img about-me__img--float" width="876" height="661" loading="lazy">
                 </figure>
             </div>
         </div>
@@ -209,7 +215,7 @@
                 <ul class="project__list">
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./assets/images/portfo.png" alt="Portfolio website screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/portfo.png" alt="Portfolio website screenshot" class="project__img" width="1338" height="768" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">My Portfolio</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -226,7 +232,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./assets/images/library.png" alt="Library management system screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/library.png" alt="Library management system screenshot" class="project__img" width="624" height="304" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Admas University Library Management System</h3>
                                 <h4 class="project__description--sub-title">HTML, CSS &amp; JavaScript</h4>
@@ -243,7 +249,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./assets/images/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/little_lemon.png" alt="Little Lemon restaurant app screenshot" class="project__img" width="1366" height="638" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Little Lemon Restaurant</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
@@ -260,7 +266,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./assets/images/w_app.png" alt="Weather app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/w_app.png" alt="Weather app screenshot" class="project__img" width="1336" height="630" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Weather App</h3>
                                 <h4 class="project__description--sub-title">React JS &amp; Weather API</h4>
@@ -277,7 +283,7 @@
                     </li>
                     <li class="project reveal">
                         <div class="project__wrapper">
-                            <img src="./assets/images/age.png" alt="Age calculator app screenshot" class="project__img" loading="lazy">
+                            <img src="./assets/images/age.png" alt="Age calculator app screenshot" class="project__img" width="1366" height="619" loading="lazy">
                             <div class="project__description">
                                 <h3 class="project__description--title">Age Calculator</h3>
                                 <h4 class="project__description--sub-title">React JS</h4>
