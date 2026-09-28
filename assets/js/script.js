@@ -282,11 +282,17 @@
         return;
       }
 
-      // 2) Validation: HTML5 "required" alone lets junk through; check length bounds too.
-      if (name.length < 2 || name.length > 100 ||
-          !isValidEmail(email) ||
-          message.length < 10 || message.length > 5000) {
-        showToast('Please check your name, email and message. ❌');
+      // 2) Validation: check each field and show specific error messages
+      if (!name) {
+        showToast('Please enter your name. ❌');
+        return;
+      }
+      if (!isValidEmail(email)) {
+        showToast('Please enter a valid email address. ❌');
+        return;
+      }
+      if (!message) {
+        showToast('Please enter a message. ❌');
         return;
       }
 
