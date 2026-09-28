@@ -324,7 +324,10 @@
           signal: controller.signal
         });
 
-        if (!res.ok) throw new Error(`FormSubmit responded with ${res.status}`);
+        if (!res.ok) {
+          const errorText = await res.text().catch(() => '');
+          throw new Error(`FormSubmit ${res.status}: ${errorText}`);
+        }
 
         showToast('Message sent! I\'ll get back to you soon. ✅');
         contactForm.reset();
@@ -332,11 +335,12 @@
       } catch (err) {
         const offline = !navigator.onLine;
         const aborted = err && err.name === 'AbortError';
+        console.error('FormSubmit error:', err.message);
         showToast(offline
           ? 'You appear to be offline — please try again. 📡'
           : aborted
             ? 'The request timed out — please try again. ⏳'
-            : 'Something went wrong — please try again. ❌');
+            : `Something went wrong: ${err.message}`);
       } finally {
         clearTimeout(timeoutId);
         if (submitBtn) {
