@@ -264,6 +264,22 @@
   if (contactForm) {
     const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 
+    // Heuristic: try a HEAD request to a URL that ad-blockers almost always
+    // block. If the request fails we can infer an ad-blocker is intercepting
+    // requests (which likely also blocked the form submission to the API).
+    async function isAdBlockerActive() {
+      try {
+        await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {
+          method: 'HEAD',
+          mode: 'no-cors',
+          cache: 'no-store'
+        });
+        return false; // request went through -> no blocker
+      } catch (e) {
+        return true; // request blocked -> almost certainly an ad-blocker
+      }
+    }
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -326,8 +342,15 @@
           showToast('Something went wrong. Please email me directly instead. ❌');
         }
       } catch (err) {
-        // Network failure, ad-blocker, or offline — suggest the direct route.
-        showToast('Network error. Please email me directly instead. ❌');
+        // fetch() only rejects like this when the request never completed:
+        // offline, DNS/network failure, or an ad-blocker killing the call.
+        let msg = 'Network error. Please email me directly instead. ❌';
+        if (navigator.onLine === false) {
+          msg = 'You appear to be offline. Check your connection and try again. ❌';
+        } else if (await isAdBlockerActive()) {
+          msg = 'Ad-blocker detected! It blocked your message. Please disable it for this site and send again. 🚫';
+        }
+        showToast(msg, 8000);
       } finally {
         submitBtn.disabled = false;
       }
@@ -336,13 +359,13 @@
 
   /* ---------- Toast helper ---------- */
   let toastTimer;
-  function showToast(message) {
+  function showToast(message, duration = 3000) {
     const toast = document.getElementById('toast');
     if (!toast) return;
     toast.textContent = message;
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), duration);
   }
 
   /* ---------- Auto year in footer ---------- */
