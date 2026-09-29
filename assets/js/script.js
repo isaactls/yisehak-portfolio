@@ -259,12 +259,12 @@
     });
   }
 
-  /* ---------- Contact form: validation + honeypot (FormSubmit handles delivery) ---------- */
+  /* ---------- Contact form: validation + honeypot (Web3Forms handles delivery) ---------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const fd = new FormData(contactForm);
@@ -273,7 +273,7 @@
       const message = (fd.get('message') || '').trim();
 
       // 1) Honeypot: real users never see this field, so a filled one means a bot.
-      if ((fd.get('_honey') || '').trim() !== '') {
+      if ((fd.get('botcheck') || '').trim() !== '') {
         contactForm.reset();
         showToast('Message sent! I\'ll get back to you soon. ✅');
         setTimeout(closeModal, 900);
@@ -294,9 +294,43 @@
         return;
       }
 
-      // 3) Submit the form normally (FormSubmit handles email delivery)
-      closeModal();
-      contactForm.submit();
+      // 3) Send via Web3Forms (https://docs.web3forms.com) using fetch, so we
+      //    can show a real success/failure message without leaving the page.
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      showToast('Sending your message…');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: contactForm.access_key.value,
+            subject: contactForm.subject.value,
+            name: name,
+            email: email,
+            message: message
+          })
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.success) {
+          contactForm.reset();
+          closeModal();
+          showToast('Message sent! I\'ll get back to you soon. ✅');
+        } else {
+          showToast('Something went wrong. Please email me directly instead. ❌');
+        }
+      } catch (err) {
+        // Network failure, ad-blocker, or offline — suggest the direct route.
+        showToast('Network error. Please email me directly instead. ❌');
+      } finally {
+        submitBtn.disabled = false;
+      }
     });
   }
 

@@ -10,7 +10,7 @@
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="CP7rQH1uwMX6BT1mHiNYGHFu96j3hbmQxaSF294s-oY" />
     <meta name="theme-color" content="#6030b1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co https://www.clarity.ms; frame-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://www.clarity.ms; frame-src 'none'; base-uri 'self'; form-action 'self'>
     <link rel="canonical" href="https://isaactls.github.io/yisehak-portfolio/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Yisehak (Isaac) Tolesa — Portfolio">
@@ -45,7 +45,7 @@
     <link rel="apple-touch-icon" href="./assets/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://formsubmit.co">
+    <link rel="preconnect" href="https://api.web3forms.com">
     <link rel="dns-prefetch" href="https://upload.wikimedia.org">
     <link rel="dns-prefetch" href="https://cdn.iconscout.com">
     <link rel="dns-prefetch" href="https://api.badgr.io">
@@ -62,7 +62,7 @@
         })(window, document, "clarity", "script", "ynzudywheq");
     </script>
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js?v=22" defer></script>
+    <script src="./assets/js/script.js?v=24" defer></script>
 </head>
 
 <body>
@@ -352,18 +352,17 @@
             <button class="modal__close" data-close-modal aria-label="Close">&times;</button>
             <h2 id="contactTitle" class="modal__title">Let's get in touch</h2>
             <p class="modal__subtitle">Have a project in mind or just want to say hi? Send me a message!</p>
-            <form id="contactForm" class="contact-form" action="https://formsubmit.co/isacktolesa@gmail.com" method="POST" novalidate>
+            <!-- Sent via Web3Forms: submissions are delivered to the inbox linked to the access key -->
+            <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                <input type="hidden" name="access_key" value="745dd0de-25e6-45bd-b7d2-69e37f98ce74">
+                <input type="hidden" name="subject" value="Portfolio message from Yisehak's site">
                 <input type="text" name="name" placeholder="Your name" required aria-label="Your name" autocomplete="name" spellcheck="false">
                 <input type="email" name="email" placeholder="Your email" required aria-label="Your email" autocomplete="email" inputmode="email">
                 <textarea name="message" rows="4" placeholder="Your message" required
                     aria-label="Your message" spellcheck="true"></textarea>
                 <!-- Honeypot: hidden from humans, bots love filling this in -->
-                <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off"
+                <input type="text" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off"
                     aria-hidden="true">
-                <input type="hidden" name="_subject" value="Portfolio message from Yisehak's site">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://isaactls.github.io/yisehak-portfolio/">
                 <button type="submit" class="btn btn--primary">Send message <i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
